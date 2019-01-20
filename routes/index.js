@@ -3,6 +3,7 @@ const router = express.Router()
 const db = require('../lib/db')
 
 router.get('/products', (req, res, next) => {
+  console.log('hello world');
   const products = db.products.findAll()
   res.json(products)
 })
