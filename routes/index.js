@@ -19,7 +19,7 @@ router.post('/products', (req, res, next) => {
     price: req.body.price,
     code: req.body.code,
     creator: req.body.creator,
-    last_modified: Date.now()
+    last_modified: Date.now()/1000
 
 
   })
