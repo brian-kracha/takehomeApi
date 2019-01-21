@@ -9,7 +9,9 @@ router.get('/products', (req, res, next) => {
 })
 
 router.get('/products/:id', (req, res, next) => {
-  const product = db.products.find(req.params.id)
+  const product = db.products.findByIdAndUpdate(req.params.id)
+
+  console.log('product',db.products.data.id);
   res.json(product)
 })
 
@@ -21,19 +23,29 @@ router.post('/products', (req, res, next) => {
     creator: req.body.creator,
     last_modified: Date.now()/1000
 
-
   })
   res.json(product)
 })
 
-router.patch('/products', (req, res, next) => {
-  console.log('req.body', req.body)
-  db.products.findAll(req.body.productIds).forEach(product => {
-    commands[req.body.command](product, req.body)
-  })
-  res.status(200)
-  res.send(db.products.findAll())
+router.patch('/products/:id', (req, res, next) => {
+  const product = db.products.find(req.params.id,req.params.price)
+
+      product.price = req.body.price
+      product.last_modified= Date.now()/1000
+      res.json(product)
 })
+
+router.delete('/product/:id', (req, res) => {
+  const product = db.products.find(req.params.id)
+  if (product) {
+    console.log(product)
+    db.products.delete(req.params.id)
+  }
+
+  res.status(200)
+  res.end()
+})
+
 
 const commands = {
 
