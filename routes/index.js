@@ -15,8 +15,12 @@ router.get('/products/:id', (req, res, next) => {
 
 router.post('/products', (req, res, next) => {
   const product = db.products.insert({
-    subject: req.body.subject,
-    body: req.body.body,
+    name: req.body.name,
+    price: req.body.price,
+    code: req.body.code,
+    creator: req.body.creator,
+    last_modified: Date.now()
+
 
   })
   res.json(product)
