@@ -35,10 +35,10 @@ router.patch('/products/:id', (req, res, next) => {
       res.json(product)
 })
 
-router.delete('/product/:id', (req, res) => {
+router.delete('/products/:id', (req, res) => {
   const product = db.products.find(req.params.id)
+
   if (product) {
-    console.log(product)
     db.products.delete(req.params.id)
   }
 
